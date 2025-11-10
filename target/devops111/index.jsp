@@ -5,7 +5,7 @@
 </head>
 <style>
 .container {
-  
+
   width: 400px;
   height:550px;
   margin-left: 75px;
@@ -16,7 +16,7 @@ h1{
 font-size:35px;
 color: blue;
     margin-top: -501px;
-    
+
     width: 600px;
 }
 
@@ -37,11 +37,10 @@ height:400px;
 <br>
 <h2>Contact us:-</h2>
 
-<h2>Polarapu Prasad</h2>
-<h2>+91-8383917484</h2>
+<h2>Raghavendra</h2>
+<h2>+91-9620063036</h2>
 
 </div>
 </div>
 </body>
 </html>
-
