@@ -1,0 +1,57 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <servers>
+    <!-- Nexus snapshot deployment -->
+    <server>
+      <id>nexus-snapshots</id>
+      <username>admin</username>
+      <password>Nexus</password>
+    </server>
+
+    <!-- Nexus release deployment -->
+    <server>
+      <id>nexus-releases</id>
+      <username>admin</username>
+      <password>Nexus</password>
+    </server>
+
+    <!-- Public (proxy) repository -->
+    <server>
+      <id>dependency-release</id>
+      <username>admin</username>
+      <password>Nexus</password>
+    </server>
+
+    <server>
+      <id>project-test-proxy</id>
+      <username>admin</username>
+      <password>Nexus</password>
+    </server>
+  </servers>
+
+  <mirrors>
+    <mirror>
+      <id>project-test-proxy</id>
+      <url>http://13.217.54.95:9000/devops/repository/project-test-proxy/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>sonar</id>
+      <properties>
+        <sonar.host.url>http://3.81.149.46:9000</sonar.host.url>
+                <sonar.login>sqa_9ec2b022489f3e4fc9af77e884e83f3e6aadcfb5</sonar.login>
+      </properties>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>sonar</activeProfile>
+  </activeProfiles>
+
+</settings>
