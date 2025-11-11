@@ -38,7 +38,7 @@
   <!-- Keep your existing Nexus proxy mirror -->
   <mirror>
     <id>project-test-proxy</id>
-    <url>http://54.196.92.246:9000/devops/repository/project-test-proxy/</url>
+    <url>http://54.205.254.74:9000/devops/repository/project-test-proxy/</url>
     <mirrorOf>central</mirrorOf>
   </mirror>
 </mirrors>
