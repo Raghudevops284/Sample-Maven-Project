@@ -31,14 +31,14 @@
   <mirror>
     <id>allow-http</id>
     <mirrorOf>external:http:*</mirrorOf>
-    <url>https://13.217.54.95:9000/devops/repository/project-test-proxy/</url>
+    <url>https://54.204.145.189:9000/devops/repository/project-test-proxy/</url>
     <blocked>false</blocked>
   </mirror>
 
   <!-- Keep your existing Nexus proxy mirror -->
   <mirror>
     <id>project-test-proxy</id>
-    <url>https://13.217.54.95:9000/devops/repository/project-test-proxy/</url>
+    <url>http://54.204.145.189:9000/devops/repository/project-test-proxy/</url>
     <mirrorOf>central</mirrorOf>
   </mirror>
 </mirrors>
@@ -48,7 +48,7 @@
     <profile>
       <id>sonar</id>
       <properties>
-        <sonar.host.url>https://3.81.149.46:9000</sonar.host.url>
+        <sonar.host.url>http://100.29.7.1676:9000</sonar.host.url>
         <sonar.login>sqa_9ec2b022489f3e4fc9af77e884e83f3e6aadcfb5</sonar.login>
       </properties>
     </profile>
