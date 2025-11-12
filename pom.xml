@@ -6,7 +6,7 @@
 
     <groupId>testproject</groupId>
     <artifactId>ProjectWeb</artifactId>
-    <version>1.10.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>ProjectWeb Maven Webapp</name>
@@ -15,7 +15,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-boot.version>2.3.3.RELEASE</spring-boot.version>
+                <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
         <sonar.organization>raghudevops284</sonar.organization>
     </properties>
 
@@ -77,7 +77,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
-			            <plugin>
+                                    <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.10.0.2594</version>
@@ -85,7 +85,7 @@
 
         </plugins>
     </build>
-	    <distributionManagement>
+            <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <name>Nexus Snapshot Repository</name>
