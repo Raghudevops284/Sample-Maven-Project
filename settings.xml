@@ -31,14 +31,14 @@
   <mirror>
     <id>allow-http</id>
     <mirrorOf>external:http:*</mirrorOf>
-    <url>http://54.165.127.222:9000/devops/repository/project-test-proxy/</url>
+    <url>http://172.31.42.123:9000/devops/repository/project-test-proxy/</url>
     <blocked>false</blocked>
   </mirror>
 
   <!-- Keep your existing Nexus proxy mirror -->
   <mirror>
     <id>project-test-proxy</id>
-    <url>http://54.165.127.222:9000/devops/repository/project-test-proxy/</url>
+    <url>http://172.31.42.123:9000/devops/repository/project-test-proxy/</url>
     <mirrorOf>central</mirrorOf>
   </mirror>
 </mirrors>
