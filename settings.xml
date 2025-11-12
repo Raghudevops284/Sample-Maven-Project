@@ -48,7 +48,7 @@
     <profile>
       <id>sonar</id>
       <properties>
-        <sonar.host.url>http://54.205.254.74:9000</sonar.host.url>
+        <sonar.host.url>http://172.31.44.79:9000</sonar.host.url>
         <sonar.login>sqa_9ec2b022489f3e4fc9af77e884e83f3e6aadcfb5</sonar.login>
       </properties>
     </profile>
