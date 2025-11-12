@@ -27,14 +27,6 @@
   </servers>
 
 <mirrors>
-  <!-- Allow HTTP Nexus Repos (override Maven’s default HTTP block) -->
-  <mirror>
-    <id>allow-http</id>
-    <mirrorOf>external:http:*</mirrorOf>
-    <url>http://172.31.42.123:9000/devops/repository/project-test-proxy/</url>
-    <blocked>false</blocked>
-  </mirror>
-
   <!-- Keep your existing Nexus proxy mirror -->
   <mirror>
     <id>project-test-proxy</id>
