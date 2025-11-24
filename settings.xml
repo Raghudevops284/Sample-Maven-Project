@@ -32,13 +32,6 @@
     </server>
   </servers>
 
-  <mirrors>
-    <mirror>
-      <id>project-test-proxy</id>
-      <url>http://172.31.42.123:9000/devops/repository/project-test-proxy/</url>
-      <mirrorOf>central</mirrorOf>
-    </mirror>
-  </mirrors>
 
   <profiles>
     <profile>
