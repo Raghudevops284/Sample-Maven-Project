@@ -31,11 +31,14 @@
       <password>Nexus</password>
     </server>
   </servers>
-<mirror>
-    <id>nexus</id>
-    <mirrorOf>*</mirrorOf>
-    <url>https://172.31.42.123:9000/devops/repository/dependency-release/</url>
-</mirror>
+
+  <mirrors>
+    <mirror>
+      <id>project-test-proxy</id>
+      <url>http://172.31.42.123:9000/devops/repository/project-test-proxy/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
 
   <profiles>
     <profile>
