@@ -30,6 +30,11 @@
       <username>admin</username>
       <password>Nexus</password>
     </server>
+<server>
+      <id>nexus-all</id>
+      <username>admin</username>
+      <password>Nexus</password>
+    </server>
   </servers>
 
   <mirrors>
