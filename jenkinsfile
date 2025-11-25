@@ -1,5 +1,24 @@
-pipeline{
+pipeline {
+    agent any
 
+    stages {
 
+        stage("Stage_Name") {
+            steps {
+                sh "echo Test Stage.; pwd; hostname"
+            }
+        }
 
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Raghudevops284/Sample-Maven-Project.git'
+            }
+        }
+    }
+
+    post {
+        success {
+            cleanWs()
+        }
+    }
 }
