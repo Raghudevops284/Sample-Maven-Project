@@ -1,4 +1,10 @@
 pipeline {
+    parameters {
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch to build')
+        choice(name: 'ENV', choices: ['dev', 'qa', 'prod'], description: 'Environment')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run Test Cases?')
+    }
+
     agent any
 
     options {
@@ -31,6 +37,14 @@ pipeline {
             }
         }
 
+        stage('Print Inputs') {
+            steps {
+                echo "Branch = ${params.BRANCH}"
+                echo "Environment = ${params.ENV}"
+                echo "Run Tests = ${params.RUN_TESTS}"
+            }
+        }
+
         stage("Print Env") {
             environment {
                 SERVER = "10.10.0.0-DEV"
@@ -52,45 +66,66 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Raghudevops284/Sample-Maven-Project.git'
+                git branch: params.BRANCH, url: 'https://github.com/Raghudevops284/Sample-Maven-Project.git'
             }
         }
 
         stage('Build') {
             steps {
-			catchError(buildResult:'SUCCESS', stageResult:'Failure') {
-                script {
-                    def mvnHome = tool 'Maven'
-                    sh "${mvnHome}/bin/mvn clean install deploy -U -s ${WORKSPACE}/settings.xml"
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    script {
+                        def mvnHome = tool 'Maven'
+                        sh "${mvnHome}/bin/mvn clean install deploy -U -s ${WORKSPACE}/settings.xml"
+                    }
                 }
             }
         }
-        }
-		
-	  stage('sonar-analysis') {
+
+        stage('Sonar Analysis') {
             steps {
                 script {
-                    def mvnHome = tool 'Maven'
-                    sh "${mvnHome}/bin/mvn sonar:sonar -U -s ${WORKSPACE}/settings.xml"
+                    def scannerHome = tool 'SonarQube'
+                    withSonarQubeEnv('SonarQube') {
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=Sample-Maven-Project \
+                            -Dsonar.sources=src \
+                            -Dsonar.java.binaries=target \
+                            -Dsonar.host.url=http://54.210.47.44:9000 \
+                            -Dsonar.login=${SONAR_AUTH_TOKEN}
+                        """
+                    }
                 }
             }
         }
-	       stage('Deploy to Tomcat') {
-    steps {
-        sshagent(['Tomcat-Server-deployments']) {
-            sh '''
-                scp -o StrictHostKeyChecking=no \
-                /var/lib/jenkins/workspace/Pipeline/target/devops111.war \
-                ubuntu@50.16.122.151:/opt/apache-tomcat-10.1.48/webapps/
-            '''
+
+        stage('Quality Gate Check') {
+            steps {
+                timeout(time: 2, unit: 'MINUTES') {
+                    script {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "❌ Quality Gate Failed: ${qg.status}"
+                        }
+                    }
+                }
+            }
         }
-    }
-}	
-		
+
+        stage('Deploy to Tomcat') {
+            steps {
+                sshagent(['Tomcat-Server-deployments']) {
+                    sh '''
+                        scp -o StrictHostKeyChecking=no \
+                        /var/lib/jenkins/workspace/Pipeline/target/devops111.war \
+                        ubuntu@54.81.163.81:/opt/apache-tomcat-10.1.48/webapps/
+                    '''
+                }
+            }
+        }
     }
 
     post {
-
         success {
             emailext(
                 to: "${env.EMAIL_RECIPIENT}",
