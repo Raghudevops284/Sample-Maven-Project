@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage("Checkout") {
+            steps {
+                echo "Checking out code..."
+                git branch: 'main', url: 'https://github.com/Raghudevops284/Sample-Maven-Project.git'
+            }
+        }
+
+        stage("Parallel Tasks") {
+            steps {
+                script {
+                    parallel(
+                        failFast: false,
+
+                        "Task 1 - Build Simulation": {
+                            stage("Task 1 - Build Simulation") {
+                                echo "Running Task 1..."
+                                sh "sleep 4"
+                                //sh "mvn clean deploy"
+                                echo "Task 1 completed."
+                            }
+                        },
+
+                        "Task 2 - Code Scan Simulation": {
+                            stage("Task 2 - Code Scan Simulation") {
+                                echo "Running Task 2..."
+                                sh "sleep 3"
+                                echo "Task 2 completed."
+                            }
+                        },
+
+                        "Task 3 - Reports": {
+                            stage("Task 3 - Reports") {
+                                echo "Generating Reports..."
+                                sh "sleep 5"
+                                echo "Reports completed."
+                            }
+                        }
+                    )
+                }
+            }
+        }
+
+        stage("Post Parallel") {
+            steps {
+                echo "All Parallel Stages Completed Successfully!"
+            }
+        }
+    }
+}
